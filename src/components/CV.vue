@@ -1,8 +1,8 @@
 <template>
   <v-container fluid>
         <v-row>
-            <v-col cols="1" sm="1" md="1"></v-col>
-            <v-col cols="10" sm="10" md="10">
+            <v-col cols="1" sm="1" md="1" class="card-bg"></v-col>
+            <v-col cols="10" sm="10" md="10" class="card-bg">
                 <br/>
                 <!-- <br/>
                 <br/> -->
@@ -14,10 +14,11 @@
                         <v-col cols="3" sm="3" md="3" class="left" align="center">
                             <br/>
                             <v-img
-                                src="../assets/male-avatar.png"
+                                src="../assets/tan.jpg"
                                 lazy-src="https://picsum.photos/id/11/100/61"
-                                max-width="200"
-                                max-height="200"
+                                max-width="150"
+                                max-height="150"
+                                id="avatar"
                             >
                                 <template v-slot:placeholder>
                                     <v-row
@@ -71,7 +72,7 @@
                                             <v-icon v-text="about"></v-icon>
                                         </v-list-item-icon>
                                         <v-list-item-content>
-                                            <v-list-item-title v-text="aboutMe"></v-list-item-title>
+                                            <v-list-item-title v-text="aboutMe" id="aboutText"></v-list-item-title>
                                         </v-list-item-content>
                                     </v-list-item>
                                 </v-list-item-group>
@@ -127,15 +128,20 @@
                                         :key="i"
                                     >
                                         <v-list-item-content>
-                                            <v-list-item-title v-text="item.role"></v-list-item-title>
+                                            <v-list-item-title>
+                                                <h3>{{item.role}}</h3>
+                                            </v-list-item-title>
+                                            <br/>
                                             <v-list-item-subtitle v-text="item.timeline"></v-list-item-subtitle>
+                                            <br/>
                                             <v-list-item-subtitle v-text="item.company"></v-list-item-subtitle>
-                                            <v-div
+                                            <br/>
+                                            <div
                                                 v-for="(task, j) in item.tasks"
                                                 :key="j"
                                             >
                                                 <v-list-item-subtitle v-text="task"></v-list-item-subtitle>
-                                            </v-div>
+                                            </div>
                                         </v-list-item-content>
                                     </v-list-item>
                                 </v-list-item-group>
@@ -143,27 +149,12 @@
                             <br/>
                             <v-list flat dense id="experience" v-if="model">
                                 <v-subheader><h1>Professional Skills:</h1></v-subheader>
-                                <v-subheader>Programming Languages</v-subheader>
+                                <v-subheader class="v-sub">Programming Languages</v-subheader>
                                 <v-list-item-group v-model="model1">
                                     <v-btn-toggle
                                         v-model="toggle_exclusive"
                                         mandatory
                                     >
-                                    <!-- <v-list-item
-                                        v-for="(item, i) in this.programmingLanguages"
-                                        :key="i"
-                                    >
-                                        <v-list-item-content>
-                                            <v-btn
-                                                rounded
-                                                color="primary"
-                                                dark
-                                            >
-                                                {{item}}
-                                            </v-btn>
-                                        </v-list-item-content>
-                                    </v-list-item>
-                                    <br> -->
                                     <v-list-item>   
                                         <v-list-item-icon>
                                             <v-icon color="blue">mdi-code-braces</v-icon>
@@ -177,7 +168,7 @@
                             </v-list>
                             <!-- <br/> -->
                             <v-list flat dense id="experience" v-if="model">
-                                <v-subheader>Databases:</v-subheader>
+                                <v-subheader class="v-sub">Databases:</v-subheader>
                                 <v-list-item-group v-model="model1">
                                     <v-list-item>   
                                         <v-list-item-icon>
@@ -190,7 +181,7 @@
                                 </v-list-item-group>
                             </v-list>
                             <v-list flat dense id="experience" v-if="model">
-                                <v-subheader>Platform + Tools:</v-subheader>
+                                <v-subheader class="v-sub">Platform + Tools:</v-subheader>
                                 <v-list-item-group v-model="model1">
                                     <v-list-item>   
                                         <v-list-item-icon>
@@ -214,18 +205,18 @@
                                             <v-list-item-title>{{item.project}}</v-list-item-title>
                                             <v-list-item-subtitle>Timeline: {{item.timeline}}</v-list-item-subtitle>
                                             <v-list-item-subtitle>Description: {{item.description}}</v-list-item-subtitle>
-                                            <v-div
+                                            <div
                                                 v-for="(task, j) in item.tech"
                                                 :key="j"
                                             >
-                                                <v-list-item-subtitle>
+                                                <v-list-item-subtitle class="vlis">
                                                     {{
                                                         j.split(' ')
                                                         .map(w => w[0].toUpperCase() + w.substr(1).toLowerCase())
                                                         .join(' ')
                                                     }}: {{task}}
                                                 </v-list-item-subtitle>
-                                            </v-div>
+                                            </div>
                                         </v-list-item-content>
                                     </v-list-item>
                                 </v-list-item-group>
@@ -254,9 +245,9 @@
                 </v-card>
                 <br/>
             </v-col>
-            <v-col cols="1" sm="1" md="1"></v-col>
+            <v-col cols="1" sm="1" md="1" class="card-bg"></v-col>
         </v-row>
-        <loading 
+        <!-- <loading 
             :active.sync="isLoading" 
             :can-cancel="true"
             :is-full-page="fullPage"
@@ -264,7 +255,7 @@
             height=50
             width=50
         >
-        </loading>
+        </loading> -->
     </v-container>
 </template>
 
@@ -272,20 +263,19 @@
 // Import Libs:
 
 import axios from 'axios';
-// Import component
-    import Loading from 'vue-loading-overlay';
-    // Import stylesheet
-    import 'vue-loading-overlay/dist/vue-loading.css';
+// import Loading from 'vue-loading-overlay';
+// import 'vue-loading-overlay/dist/vue-loading.css';
 
 export default {
     components: {
-        Loading
+        // Loading
     },
 
     data() {
         return {
             name: '',
             aboutMe: '',
+            designation: '',
             pythonLogo: 'mdi-language-python',
             about: 'mdi-information',
             email: 'mdi-email',
@@ -373,8 +363,8 @@ export default {
                 headers: this.headers
             }).then(
                 (res) => {
-                    window.console.log(res);
-                    window.console.log(res.data.cv_data.contact);
+                    // window.console.log(res);
+                    window.console.log(res.data.cv_data);
 
                     this.$toastr.s('Loading Data from API');
 
@@ -421,10 +411,23 @@ export default {
 </script>
 
 <style>
+    #about{
+        /* display: inline-block; */
+        /* overflow-x: auto; */
+    }
+    #aboutText{
+        /* overflow-x: auto; */
+        /* word-wrap: break-all !important; */
+        -webkit-line-clamp: unset !important;
+        white-space: normal;
+    }
     .card{
         padding: 0em;
         box-shadow: 0px 0px 10px rgba(0,0,0,0.5) !important;
         /* box-shadow: 10px rgba(0,0,0,0.5) !important; */
+    }
+    .card-bg{
+        background-color: #ffffff;
     }
     #contact, #about{
         border: 0;
@@ -448,5 +451,20 @@ export default {
         background-color: #ffffff;
         color: #000000;
         padding: 10px;
+    }
+    h1, h2, h3, h4, h5, h6{
+        color: #0861CE;
+    }
+    .v-list-item__subtitle{
+        /* color: #93A7BD !important; */
+        color: black !important;
+    }
+    .v-sub{
+        font-size: 15px !important;
+        color: #000000 !important;
+    }
+    #avatar{
+        border-radius: 50%;
+        border: 5px solid #0861CE !important;
     }
 </style>

@@ -7,6 +7,7 @@ import '@fortawesome/fontawesome-free/css/all.css'
 import Login from './components/Login';
 import HelloWorld from './components/HelloWorld';
 import CV from './components/CV';
+import CVAPI from './components/CVAPI';
 
 Vue.config.productionTip = false
 
@@ -24,6 +25,9 @@ const routes = [
     },
     {
         path: '/cv', component: CV, meta: { title: 'Curriculam Vitae'}
+    },
+    {
+        path: '/cv-api', component: CVAPI, meta: { title: 'CV API'}
     },
     {
         path: '/*', redirect: '/login', meta: { title: 'Login'}
