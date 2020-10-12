@@ -347,10 +347,8 @@ export default {
         getCVData () {
             let url = 'https://tancv-api.herokuapp.com/cv/v1/cv-info';
             // let url = 'http://localhost:5000/cv/v1/cv-info'
-            var data = {
-                'username': this.username,
-                'password': this.password
-            }
+            let token = window.sessionStorage.getItem('token');
+            this.headers['Authorization'] = token;
 
             this.isLoading = true;
             
@@ -359,7 +357,7 @@ export default {
                 }, 500
             )
 
-            axios.get(url, data, {
+            axios.get(url, {
                 headers: this.headers
             }).then(
                 (res) => {

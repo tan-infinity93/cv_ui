@@ -119,6 +119,7 @@ export default {
                 }).then(
                     (res) => {
                         window.console.log(res);
+                        window.sessionStorage.setItem('token', res.data.token);
                         this.$toastr.s('Login is Successful...!!!')
                         // window.location = '/#/image-loader'
                     }
