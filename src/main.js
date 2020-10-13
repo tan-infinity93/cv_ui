@@ -8,6 +8,7 @@ import Login from './components/Login';
 import HelloWorld from './components/HelloWorld';
 import CV from './components/CV';
 import CVAPI from './components/CVAPI';
+import Platform from './components/Platform'
 
 Vue.config.productionTip = false
 
@@ -28,6 +29,9 @@ const routes = [
     },
     {
         path: '/cv-api', component: CVAPI, meta: { title: 'CV API'}
+    },
+    {
+        path: '/platform', component: Platform, meta: { title: 'Platform'}
     },
     {
         path: '/*', redirect: '/login', meta: { title: 'Login'}

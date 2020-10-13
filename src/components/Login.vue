@@ -16,7 +16,7 @@
                 >
                     <v-text-field
                         v-model="username"
-                        :counter="10"
+                        :counter="20"
                         :rules="usernameRules"
                         label="Name"
                         required
@@ -24,6 +24,7 @@
 
                     <v-text-field
                         v-model="password"
+                        :counter="20"
                         :rules="passwordRules"
                         label="Password"
                         required
@@ -79,12 +80,12 @@ export default {
             username: '',
             usernameRules: [
                 v => !!v || 'Username is required',
-                v => (v && v.length <= 10) || 'Username must be less than 10 characters',
+                v => (v && v.length <= 20) || 'Username must be less than 10 characters',
             ],
             password: '',
             passwordRules: [
                 v => !!v || 'Password is required',
-                v => (v && v.length <= 10) || 'Password must be less than 10 characters',
+                v => (v && v.length <= 20) || 'Password must be less than 10 characters',
             ],
             headers: {
                 'Content-Type': 'application/json',
@@ -108,7 +109,7 @@ export default {
             // this.$toastr.s('Login is Successful...!!!')
             this.$refs.form.validate();
             
-            if(this.userName != '' && this.passWord != ''){
+            if(this.username != '' && this.password != ''){
                 let url = 'https://tancv-api.herokuapp.com/cv/v1/token-create';
                 var data = {
                     'username': this.username,
@@ -126,9 +127,12 @@ export default {
                 ).catch(
                     (e) => {
                         window.console.log(e.response);
-                        this.$toastr.e('Please try after some time...!!!')
+                        this.$toastr.e('Please try after some time...!!!');
                     }
                 )
+            }
+            else{
+                this.$toastr.e('Please check username or password');
             }
         }
     }
