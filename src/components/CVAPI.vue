@@ -49,7 +49,7 @@ export default {
 
 	methods: {
         getCVData () {
-            let url = 'https://tancv-api.herokuapp.com/cv/v1/cv-info';
+            let url = 'https://overwatch-cv-api.herokuapp.com/cv/v1/cv-info';
 			// let url = 'http://localhost:5000/cv/v1/cv-info'
 			let token = window.sessionStorage.getItem('token');
             this.headers['Authorization'] = token;

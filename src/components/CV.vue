@@ -334,6 +334,7 @@ export default {
             internships: [],
             interests: [],
             model: 0,
+            model1: 0,
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*'
@@ -345,7 +346,7 @@ export default {
 
     methods: {
         getCVData () {
-            let url = 'https://tancv-api.herokuapp.com/cv/v1/cv-info';
+            let url = 'https://overwatch-cv-api.herokuapp.com/cv/v1/cv-info';
             // let url = 'http://localhost:5000/cv/v1/cv-info'
             let token = window.sessionStorage.getItem('token');
             this.headers['Authorization'] = token;
@@ -384,10 +385,11 @@ export default {
                             this.skills = res.data.cv_data.skills;
                             this.programmingLanguages = res.data.cv_data.skills.programming_languages;
                             this.databases = res.data.cv_data.skills.databases;
-                            this.tools = res.data.cv_data.skills.['tools/platform'];
+                            this.tools = res.data.cv_data.skills['tools/platform'];
                             this.internships = res.data.cv_data.internships;
                             this.interests = res.data.cv_data.interests;
                             this.model = 1;
+                            this.model1 = 1;
                         },
                         1000
                     );    
